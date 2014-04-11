@@ -23,13 +23,13 @@ class MyFrame(wx.Frame):
         # begin wxGlade: MyFrame.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwds)
-        self.slider_1 = wx.Slider(self, ID_SLIDER_1, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_2 = wx.Slider(self, ID_SLIDER_2, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_3 = wx.Slider(self, ID_SLIDER_3, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_4 = wx.Slider(self, ID_SLIDER_4, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_5 = wx.Slider(self, ID_SLIDER_5, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_6 = wx.Slider(self, ID_SLIDER_6, 0, 0, 100, style=wx.SL_VERTICAL)
-        self.slider_7 = wx.Slider(self, ID_SLIDER_7, 0, 0, 100, style=wx.SL_VERTICAL)
+        self.slider_1 = wx.Slider(self, ID_SLIDER_1, 25, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_2 = wx.Slider(self, ID_SLIDER_2, 35, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_3 = wx.Slider(self, ID_SLIDER_3, 55, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_4 = wx.Slider(self, ID_SLIDER_4, 40, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_5 = wx.Slider(self, ID_SLIDER_5, 77, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_6 = wx.Slider(self, ID_SLIDER_6, 0, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_7 = wx.Slider(self, ID_SLIDER_7, 0, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
 
         self.__set_properties()
         self.__do_layout()
@@ -47,6 +47,21 @@ class MyFrame(wx.Frame):
 	self.g('set xrange [-30:30]')
 	self.g('set yrange [-30:30]')
 	self.g('set style data dots')
+	# do first plot
+        xy = []
+        t = 0.5 * 2 * math.pi
+        a = self.slider_1.GetValue() / 100. * 2
+        b = self.slider_2.GetValue() / 100. * 2
+        c = self.slider_3.GetValue() / 100. * 4
+        d = self.slider_4.GetValue() / 100. * 2
+        e = self.slider_5.GetValue() / 100. * 2
+        while (t < 2.5 * 2 * math.pi):
+            x = a*t*math.sin(c*t**d) + b*math.sin(8*t**e)
+            y = a*t*math.cos(c*t**d) + b*math.cos(8*t**e)
+            xy.append([x,y])
+            t += 4*math.pi / 5000.
+        self.g.plot(xy)
+
 
     def __set_properties(self):
         # begin wxGlade: MyFrame.__set_properties
@@ -69,6 +84,7 @@ class MyFrame(wx.Frame):
         # end wxGlade
 
     def update(self,event):
+	# put your function here!
 	xy = []
 	t = 0.5 * 2 * math.pi
 	a = self.slider_1.GetValue() / 100. * 2
@@ -78,7 +94,7 @@ class MyFrame(wx.Frame):
 	e = self.slider_5.GetValue() / 100. * 2
 	while (t < 2.5 * 2 * math.pi):
 	    x = a*t*math.sin(c*t**d) + b*math.sin(8*t**e)
-	    y = a**t*math.cos(c*t**d) + b*math.cos(8*t**e)
+	    y = a*t*math.cos(c*t**d) + b*math.cos(8*t**e)
 	    xy.append([x,y])
 	    t += 4*math.pi / 5000.
         self.g.plot(xy)
