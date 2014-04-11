@@ -28,7 +28,7 @@ class MyFrame(wx.Frame):
         self.slider_3 = wx.Slider(self, ID_SLIDER_3, 55, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
         self.slider_4 = wx.Slider(self, ID_SLIDER_4, 40, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
         self.slider_5 = wx.Slider(self, ID_SLIDER_5, 77, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
-        self.slider_6 = wx.Slider(self, ID_SLIDER_6, 0, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
+        self.slider_6 = wx.Slider(self, ID_SLIDER_6, 40, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
         self.slider_7 = wx.Slider(self, ID_SLIDER_7, 0, 0, 100, style=wx.SL_VERTICAL | wx.SL_LABELS)
 
         self.__set_properties()
@@ -55,9 +55,10 @@ class MyFrame(wx.Frame):
         c = self.slider_3.GetValue() / 100. * 4
         d = self.slider_4.GetValue() / 100. * 2
         e = self.slider_5.GetValue() / 100. * 2
+	f = self.slider_6.GetValue() / 100. * 20
         while (t < 2.5 * 2 * math.pi):
-            x = a*t*math.sin(c*t**d) + b*math.sin(8*t**e)
-            y = a*t*math.cos(c*t**d) + b*math.cos(8*t**e)
+            x = a*t*math.sin(c*t**d) + b*math.sin(f*t**e)
+            y = a*t*math.cos(c*t**d) + b*math.cos(f*t**e)
             xy.append([x,y])
             t += 4*math.pi / 5000.
         self.g.plot(xy)
@@ -92,9 +93,10 @@ class MyFrame(wx.Frame):
 	c = self.slider_3.GetValue() / 100. * 4
 	d = self.slider_4.GetValue() / 100. * 2
 	e = self.slider_5.GetValue() / 100. * 2
+	f = self.slider_6.GetValue() / 100. * 20
 	while (t < 2.5 * 2 * math.pi):
-	    x = a*t*math.sin(c*t**d) + b*math.sin(8*t**e)
-	    y = a*t*math.cos(c*t**d) + b*math.cos(8*t**e)
+	    x = a*t*math.sin(c*t**d) + b*math.sin(f*t**e)
+	    y = a*t*math.cos(c*t**d) + b*math.cos(f*t**e)
 	    xy.append([x,y])
 	    t += 4*math.pi / 5000.
         self.g.plot(xy)
